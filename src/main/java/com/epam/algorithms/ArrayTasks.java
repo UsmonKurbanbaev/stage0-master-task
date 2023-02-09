@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-        return null;
+        return new String[]{"Winter", "Spring", "Summer", "Autumn"};
     }
 
     /**
@@ -23,7 +23,10 @@ public class ArrayTasks {
      * length = 1  -> [1] length = 3  -> [1, 2, 3] length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-        return null;
+        int[] result = new int[length];
+        for (int i = 0; i < length; i++)
+            result[i] = i + 1;
+        return result;
     }
 
     /**
@@ -34,7 +37,10 @@ public class ArrayTasks {
      * arr = [1, 3, 5]   -> sum = 9 arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-        return 0;
+        int result = 0;
+        for(int i = 0; i < arr.length; i++)
+            result += arr[i];
+        return result;
     }
 
     /**
@@ -46,7 +52,11 @@ public class ArrayTasks {
      * arr = [99, -7, 102], number = -7    ->   2 arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-        return 0;
+        for (int i=0; i<arr.length; i++) {
+            if(arr[i] == number)
+                return i;
+        }
+        return -1;
     }
 
     /**
@@ -58,7 +68,10 @@ public class ArrayTasks {
      * "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-        return null;
+        String[] result = new String[arr.length];
+        for(int i = 0; i < arr.length; i++)
+            result[i] = arr[arr.length - 1 - i];
+        return result;
     }
 
     /**
@@ -70,7 +83,17 @@ public class ArrayTasks {
      * arr = [1,-2, 3]      -> [1, 3] arr = [-1, -2, -3]   -> [] arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-        return null;
+        int len = 0, index = 0;
+        for(int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0)
+                len++;
+        }
+        int[] result = new int[len];
+        for(int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0)
+                result[index++] = arr[i];
+        }
+        return result;
     }
 
     /**
@@ -83,7 +106,56 @@ public class ArrayTasks {
      * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]] arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        return null;
+        print(arr);
+        int indexOfMinLength, minLength;
+        for(int i = 0; i < arr.length - 1; i++){
+            minLength = arr[i].length;
+            indexOfMinLength = i;
+            for(int j = i+1; j < arr.length; j++){
+                if(minLength > arr[j].length){
+                    minLength = arr[j].length;
+                    indexOfMinLength = j;
+                }
+            }
+            if(i != indexOfMinLength) {
+                int[] temp = arr[i];
+                arr[i] = arr[indexOfMinLength];
+                arr[indexOfMinLength] = temp;
+            }
+        }
+        for(int k = 0; k < arr.length; k++)
+            sort(arr[k]);
+        print(arr);
+        return arr;
     }
 
+    public void sort(int[] arr) {
+        int minElemOfArr, indexOfMinElem;
+        for (int i = 0; i < arr.length-1; i++) {
+            minElemOfArr = arr[i];
+            indexOfMinElem = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (minElemOfArr > arr[j]) {
+                    minElemOfArr = arr[j];
+                    indexOfMinElem = j;
+                }
+            }
+            if (i != indexOfMinElem) {
+                int temp2 = arr[i];
+                arr[i] = arr[indexOfMinElem];
+                arr[indexOfMinElem] = temp2;
+            }
+        }
+    }
+
+    private void print(int[][] arr){
+        System.out.println();
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[i].length; j++){
+                System.out.print(" " + arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
